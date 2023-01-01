@@ -1,5 +1,7 @@
 package de.muspellheim.restaurant;
 
+import static org.junit.jupiter.api.Assertions.assertDoesNotThrow;
+
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
 
@@ -7,5 +9,7 @@ import org.springframework.boot.test.context.SpringBootTest;
 class RestaurantApplicationTests {
 
   @Test
-  void contextLoads() {}
+  void contextLoads() {
+    assertDoesNotThrow(() -> new Throwable());
+  }
 }
