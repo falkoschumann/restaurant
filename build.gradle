@@ -21,12 +21,27 @@ dependencies {
   spotbugsSlf4j 'org.slf4j:slf4j-simple:1.7.36'
 }
 
-compileJava {
-  options.release = 17
+java {
+  sourceCompatibility = 17
+  targetCompatibility = 17
 }
 
-tasks.named('test') {
+compileJava {
+  options.release = 17
+  options.encoding = 'utf-8'
+}
+
+test {
   useJUnitPlatform()
+  testLogging {
+    events 'passed', 'skipped', 'failed'
+    exceptionFormat 'full'
+  }
+}
+
+compileTestJava {
+  options.release = 17
+  options.encoding = 'utf-8'
 }
 
 checkstyle {
