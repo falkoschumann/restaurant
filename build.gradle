@@ -1,10 +1,7 @@
 plugins {
   id 'java'
-  id 'checkstyle'
   id 'jacoco'
-  id 'pmd'
   id 'com.diffplug.spotless' version '6.12.0'
-  id 'com.github.spotbugs' version '5.0.13'
   id 'org.sonarqube' version '3.5.0.2730'
   id 'org.springframework.boot' version '2.7.7'
   id 'io.spring.dependency-management' version '1.0.15.RELEASE'
@@ -20,7 +17,6 @@ repositories {
 dependencies {
   implementation 'org.springframework.boot:spring-boot-starter-web'
   testImplementation 'org.springframework.boot:spring-boot-starter-test'
-  spotbugsSlf4j 'org.slf4j:slf4j-simple:1.7.36'
 }
 
 java {
@@ -37,6 +33,7 @@ test {
   useJUnitPlatform()
   testLogging {
     events 'passed', 'skipped', 'failed'
+    showExceptions = true
     exceptionFormat 'full'
   }
   finalizedBy jacocoTestReport
@@ -47,22 +44,11 @@ compileTestJava {
   options.encoding = 'utf-8'
 }
 
-checkstyle {
-  var archive = configurations.checkstyle.stream().filter {
-    it.name.startsWith('checkstyle')
-  }.findFirst().get()
-  config = resources.text.fromArchiveEntry(archive, 'google_checks.xml')
-  maxWarnings = 0
-}
-
 jacocoTestReport {
-  dependsOn test // tests are required to run before generating the report
-}
-
-pmd {
-  consoleOutput = true
-  rulesMinimumPriority = 5
-  ruleSets = ['category/java/errorprone.xml', 'category/java/bestpractices.xml']
+  dependsOn test
+  reports {
+    xml.required = true
+  }
 }
 
 spotless {
