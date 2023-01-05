@@ -9,5 +9,7 @@ import org.springframework.web.bind.annotation.RestController;
 @RequestMapping(path = "/reservations")
 public class ReservationsController {
   @PostMapping(produces = MediaType.APPLICATION_JSON_VALUE)
-  public void post() {}
+  public void post() {
+    // TODO implement method
+  }
 }
