@@ -18,17 +18,14 @@ repositories {
 
 dependencies {
   implementation 'org.springframework.boot:spring-boot-starter-web'
-  testImplementation 'org.springframework.boot:spring-boot-starter-test'
-}
 
-java {
-  sourceCompatibility = 17
-  targetCompatibility = 17
+  testImplementation 'org.springframework.boot:spring-boot-starter-test'
 }
 
 compileJava {
   options.release = 17
   options.encoding = 'utf-8'
+  options.compilerArgs.addAll(['-Werror', '-implicit:class'])
 }
 
 test {
@@ -44,6 +41,7 @@ test {
 compileTestJava {
   options.release = 17
   options.encoding = 'utf-8'
+  options.compilerArgs.addAll(['-Werror', '-implicit:class'])
 }
 
 jacocoTestReport {
