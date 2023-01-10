@@ -1,4 +1,5 @@
 plugins {
+  id 'checkstyle'
   id 'java'
   id 'jacoco'
   id 'com.diffplug.spotless' version '6.12.0'
@@ -50,6 +51,15 @@ jacocoTestReport {
   reports {
     xml.required = true
   }
+}
+
+checkstyle {
+  var archive = configurations.checkstyle.filter {
+    it.name.startsWith("checkstyle")
+  }
+  config = resources.text.fromArchiveEntry(archive, "google_checks.xml")
+  configProperties 'org.checkstyle.google.suppressionfilter.config': file('config/checkstyle/suppressions.xml')
+  maxWarnings = 0
 }
 
 spotless {
