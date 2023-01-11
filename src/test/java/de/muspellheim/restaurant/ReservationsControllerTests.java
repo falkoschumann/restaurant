@@ -9,9 +9,6 @@ import org.junit.jupiter.api.Test;
 class ReservationsControllerTests {
   @Test
   void postValidReservationWhenDatabaseIsEmpty() {
-    new ReservationDto(null, null, null, 0);
-    new Reservation(null, null, null, 0);
-
     var db = new FakeDatabase();
     var sut = new ReservationsController(db);
 
