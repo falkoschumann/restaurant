@@ -1,4 +1,4 @@
-package de.muspellheim.restaurant;
+package de.muspellheim.restaurant.it;
 
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.content;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;

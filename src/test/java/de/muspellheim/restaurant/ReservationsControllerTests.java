@@ -1,46 +1,26 @@
 package de.muspellheim.restaurant;
 
-import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
+import static org.hamcrest.MatcherAssert.assertThat;
+import static org.hamcrest.Matchers.hasItem;
 
-import com.fasterxml.jackson.databind.ObjectMapper;
 import java.time.LocalDateTime;
-import lombok.SneakyThrows;
 import org.junit.jupiter.api.Test;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
-import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.http.MediaType;
-import org.springframework.test.web.servlet.MockMvc;
-import org.springframework.test.web.servlet.request.MockHttpServletRequestBuilder;
-import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
 
-@SpringBootTest
-@AutoConfigureMockMvc
 class ReservationsControllerTests {
-  @Autowired private MockMvc mvc;
-  @Autowired private ObjectMapper objectMapper;
-
   @Test
-  void postValidReservation() throws Exception {
-    var request =
-        postReservation(
-            Reservation.builder()
-                .date(LocalDateTime.of(2023, 3, 10, 19, 0))
-                .email("katinka@example.com")
-                .name("Katinka Ingabogovinanana")
-                .quantity(2)
-                .build());
+  void postValidReservationWhenDatabaseIsEmpty() {
+    new ReservationDto(null, null, null, 0);
+    new Reservation(null, null, null, 0);
 
-    var response = mvc.perform(request);
+    var db = new FakeDatabase();
+    var sut = new ReservationsController(db);
 
-    response.andExpect(status().is2xxSuccessful());
-  }
+    var dto = new ReservationDto("2023-11-24 19:00", "juliad@example.net", "Julia Domna", 5);
+    sut.post(dto);
 
-  @SneakyThrows
-  private MockHttpServletRequestBuilder postReservation(Reservation reservation) {
-    var json = objectMapper.writeValueAsString(reservation);
-    return MockMvcRequestBuilders.post("/reservations")
-        .contentType(MediaType.APPLICATION_JSON)
-        .content(json);
+    var expected =
+        new Reservation(
+            LocalDateTime.of(2023, 11, 24, 19, 0), "juliad@example.net", "Julia Domna", 5);
+    assertThat(db, hasItem(expected));
   }
 }

@@ -1,4 +1,4 @@
-package de.muspellheim.restaurant;
+package de.muspellheim.restaurant.it;
 
 import static org.junit.jupiter.api.Assertions.assertDoesNotThrow;
 
