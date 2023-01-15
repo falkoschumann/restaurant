@@ -25,7 +25,6 @@ public class ReservationsController {
     Objects.requireNonNull(dto, "dto");
 
     repository.create(
-        new Reservation(
-            LocalDateTime.of(2023, 11, 24, 19, 0), "juliad@example.net", "Julia Domna", 5));
+        new Reservation(LocalDateTime.parse(dto.at()), dto.email(), dto.name(), dto.quantity()));
   }
 }

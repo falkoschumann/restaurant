@@ -25,7 +25,7 @@ class ReservationsControllerTests {
     var request =
         postReservation(
             new ReservationDto(
-                "2023-03-10 19:00", "katinka@example.com", "Katinka Ingabogovinanana", 2));
+                "2023-03-10T19:00", "katinka@example.com", "Katinka Ingabogovinanana", 2));
 
     var response = mvc.perform(request);
 
