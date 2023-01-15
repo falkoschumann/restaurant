@@ -1,4 +1,4 @@
-CREATE TABLE reservations (
+CREATE TABLE IF NOT EXISTS reservations (
     PRIMARY KEY (id),
     id       INT          NOT NULL GENERATED ALWAYS AS IDENTITY,
     at       TIMESTAMP    NOT NULL,
