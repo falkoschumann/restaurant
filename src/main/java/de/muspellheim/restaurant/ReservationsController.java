@@ -43,6 +43,9 @@ public class ReservationsController {
 
     repository.create(
         new Reservation(
-            at, dto.email(), Objects.requireNonNullElse(dto.name(), ""), dto.quantity()));
+            at,
+            Objects.requireNonNull(dto.email()),
+            Objects.requireNonNullElse(dto.name(), ""),
+            dto.quantity()));
   }
 }

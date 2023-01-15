@@ -10,13 +10,10 @@ class ReservationTests {
   @ParameterizedTest
   @ValueSource(ints = {0, -1})
   void quantityMustBePositive(int invalidQuantity) {
+    LocalDateTime at = LocalDateTime.of(2024, 8, 19, 11, 30);
+
     assertThrows(
         IllegalArgumentException.class,
-        () ->
-            new Reservation(
-                LocalDateTime.of(2024, 8, 19, 11, 30),
-                "mail@example.com",
-                "Marie Ilsøe",
-                invalidQuantity));
+        () -> new Reservation(at, "mail@example.com", "Marie Ilsøe", invalidQuantity));
   }
 }
