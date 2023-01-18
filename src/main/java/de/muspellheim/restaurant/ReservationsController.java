@@ -41,7 +41,9 @@ public class ReservationsController {
       throw new ResponseStatusException(HttpStatus.BAD_REQUEST);
     }
 
-    if (dto.email().equals("shli@example.org")) {
+    var reservations = repository.readReservations(at.toLocalDate());
+    var reservedSeats = reservations.stream().mapToInt(Reservation::quantity).sum();
+    if (10 < reservedSeats + dto.quantity()) {
       throw new ResponseStatusException(HttpStatus.INTERNAL_SERVER_ERROR);
     }
 

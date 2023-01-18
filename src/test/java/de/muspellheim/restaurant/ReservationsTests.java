@@ -33,6 +33,7 @@ class ReservationsTests {
     "2023-11-24T19:00,juliad@example.net,Julia Domna,5",
     "2024-02-13T18:15,x@example.com,Xenia Ng,9",
     "2023-08-23T16:55,kite@example.edu,,2",
+    "2022-03-18T17:30,shli@example.org,Shanghai Li, 5",
   })
   void postValidReservationWhenDatabaseIsEmpty(
       String at, String email, @Nullable String name, int quantity) {
@@ -72,5 +73,17 @@ class ReservationsTests {
             new ReservationDto("2022-03-18T17:30", "shli@example.org", "Shanghai Li", 5));
 
     response.andExpect(status().isInternalServerError());
+  }
+
+  @Test
+  void bookTableWhenFreeSeatingIsAvailable() throws Exception {
+    service.postReservation(
+        new ReservationDto("2023-01-02T18:15", "net@example.net", "Ned Tucker", 2));
+
+    var response =
+        service.postReservation(
+            new ReservationDto("2023-01-02T18:30", "kant@example.edu", "Katrine Nøhr Troelsen", 4));
+
+    response.andExpect(status().is2xxSuccessful());
   }
 }
