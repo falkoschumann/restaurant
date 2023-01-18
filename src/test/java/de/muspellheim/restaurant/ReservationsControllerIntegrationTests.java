@@ -1,9 +1,8 @@
-package de.muspellheim.restaurant.it;
+package de.muspellheim.restaurant;
 
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
-import de.muspellheim.restaurant.ReservationDto;
 import lombok.SneakyThrows;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
@@ -19,7 +18,7 @@ import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
 
 @SpringBootTest
 @AutoConfigureMockMvc
-class ReservationsControllerTests {
+class ReservationsControllerIntegrationTests {
   @Autowired private MockMvc mvc;
   @Autowired private ObjectMapper objectMapper;
 

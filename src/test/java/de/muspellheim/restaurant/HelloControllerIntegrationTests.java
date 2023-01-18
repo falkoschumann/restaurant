@@ -1,4 +1,4 @@
-package de.muspellheim.restaurant.it;
+package de.muspellheim.restaurant;
 
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.content;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
@@ -13,7 +13,7 @@ import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
 
 @SpringBootTest
 @AutoConfigureMockMvc
-class HelloControllerTests {
+class HelloControllerIntegrationTests {
   @Autowired private MockMvc mvc;
 
   @Test

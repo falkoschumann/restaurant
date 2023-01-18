@@ -33,6 +33,10 @@ compileJava {
 
 test {
   useJUnitPlatform()
+  if (System.properties['skipIntegrationTests'] != null) {
+    println '***** Skip integration tests !!! *****'
+    excludes = ['**/*IntegrationTests*']
+  }
   testLogging {
     events 'passed', 'skipped', 'failed'
     showExceptions = true

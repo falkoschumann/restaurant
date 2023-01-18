@@ -8,3 +8,9 @@ Simple online reservation system for a restaurant.
 ## Installation
 
 ## Usage
+
+## Contributing
+
+Skip integration tests:
+
+    ./gradlew test -DskipIntegrationTests
