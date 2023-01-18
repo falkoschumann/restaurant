@@ -61,4 +61,16 @@ class ReservationsTests {
 
     response.andExpect(status().isBadRequest());
   }
+
+  @Test
+  void overbookAttempt() throws Exception {
+    service.postReservation(
+        new ReservationDto("2022-03-18T17:30", "mars@example.edu", "Marina Seminova", 6));
+
+    var response =
+        service.postReservation(
+            new ReservationDto("2022-03-18T17:30", "shli@example.org", "Shanghai Li", 5));
+
+    response.andExpect(status().isInternalServerError());
+  }
 }

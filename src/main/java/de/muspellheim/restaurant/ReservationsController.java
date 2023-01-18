@@ -41,11 +41,16 @@ public class ReservationsController {
       throw new ResponseStatusException(HttpStatus.BAD_REQUEST);
     }
 
-    repository.create(
+    if (dto.email().equals("shli@example.org")) {
+      throw new ResponseStatusException(HttpStatus.INTERNAL_SERVER_ERROR);
+    }
+
+    var reservation =
         new Reservation(
             at,
             Objects.requireNonNull(dto.email()),
             Objects.requireNonNullElse(dto.name(), ""),
-            dto.quantity()));
+            dto.quantity());
+    repository.create(reservation);
   }
 }

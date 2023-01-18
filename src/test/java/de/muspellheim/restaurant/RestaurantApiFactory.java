@@ -1,7 +1,6 @@
 package de.muspellheim.restaurant;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
-import lombok.SneakyThrows;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
 import org.springframework.stereotype.Component;
@@ -14,8 +13,7 @@ public class RestaurantApiFactory {
   @Autowired private MockMvc mvc;
   @Autowired private ObjectMapper objectMapper;
 
-  @SneakyThrows
-  public ResultActions postReservation(ReservationDto reservation) {
+  public ResultActions postReservation(ReservationDto reservation) throws Exception {
     var json = objectMapper.writeValueAsString(reservation);
     var request =
         MockMvcRequestBuilders.post("/reservations")
