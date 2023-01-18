@@ -13,7 +13,7 @@ import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
 
 @SpringBootTest
 @AutoConfigureMockMvc
-class HelloControllerIntegrationTests {
+class HomeTests {
   @Autowired private MockMvc mvc;
 
   @Test

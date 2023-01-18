@@ -10,7 +10,7 @@ public class HelloController {
   @GetMapping(path = "/", produces = MediaType.APPLICATION_JSON_VALUE)
   public String index() {
     return """
-      { "message": "Hello World!" }
-    """.trim();
+           { "message": "Hello World!" }
+           """;
   }
 }
