@@ -1,7 +1,6 @@
 package de.muspellheim.restaurant;
 
 import java.time.LocalDateTime;
-import java.time.format.DateTimeParseException;
 import java.util.Objects;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
@@ -25,21 +24,11 @@ public class ReservationsController {
   @ResponseStatus(HttpStatus.NO_CONTENT)
   public void post(@RequestBody ReservationDto dto) {
     Objects.requireNonNull(dto, "dto");
-    if (dto.at() == null) {
+    if (!dto.isValid()) {
       throw new ResponseStatusException(HttpStatus.BAD_REQUEST);
     }
-    LocalDateTime at;
-    try {
-      at = LocalDateTime.parse(dto.at());
-    } catch (DateTimeParseException e) {
-      throw new ResponseStatusException(HttpStatus.BAD_REQUEST);
-    }
-    if (dto.email() == null) {
-      throw new ResponseStatusException(HttpStatus.BAD_REQUEST);
-    }
-    if (dto.quantity() < 1) {
-      throw new ResponseStatusException(HttpStatus.BAD_REQUEST);
-    }
+
+    var at = LocalDateTime.parse(Objects.requireNonNull(dto.at()));
 
     var reservations = repository.readReservations(at.toLocalDate());
     var reservedSeats = reservations.stream().mapToInt(Reservation::quantity).sum();
