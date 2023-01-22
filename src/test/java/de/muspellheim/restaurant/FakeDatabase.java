@@ -3,11 +3,11 @@ package de.muspellheim.restaurant;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Collection;
-import org.springframework.context.annotation.Profile;
+import org.springframework.context.annotation.Primary;
 import org.springframework.stereotype.Repository;
 
 @Repository
-@Profile("test")
+@Primary
 public class FakeDatabase extends ArrayList<Reservation> implements ReservationsRepository {
 
   @Override

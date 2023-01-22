@@ -38,7 +38,7 @@ class ReservationsTests {
   void postValidReservationWhenDatabaseIsEmpty(
       String at, String email, @Nullable String name, int quantity) {
     var db = new FakeDatabase();
-    var sut = new ReservationsController(db);
+    var sut = new ReservationsController(db, Some.MAITRE_D, new FakeClockFactory());
 
     var dto = new ReservationDto(at, email, name, quantity);
     sut.post(dto);

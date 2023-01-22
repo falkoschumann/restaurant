@@ -6,12 +6,10 @@ import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.Collection;
 import java.util.Objects;
-import org.springframework.context.annotation.Profile;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Repository;
 
 @Repository
-@Profile("production")
 public class SqlReservationsRepository implements ReservationsRepository {
   private final JdbcTemplate jdbc;
 
