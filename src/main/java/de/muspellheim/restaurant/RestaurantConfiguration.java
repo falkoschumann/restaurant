@@ -22,6 +22,9 @@ public class RestaurantConfiguration {
 
   @Autowired
   public RestaurantConfiguration(List<TableConfiguration> tables) {
+    opensAt = LocalTime.of(18, 0);
+    lastSeating = LocalTime.of(21, 0);
+    seatingDuration = Duration.ofHours(4);
     this.tables = tables;
   }
 }
