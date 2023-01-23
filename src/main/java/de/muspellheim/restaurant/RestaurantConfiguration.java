@@ -14,7 +14,9 @@ public class RestaurantConfiguration {
   @DateTimeFormat(iso = DateTimeFormat.ISO.TIME)
   private LocalTime opensAt;
 
+  @DateTimeFormat(iso = DateTimeFormat.ISO.TIME)
   private LocalTime lastSeating;
+
   private Duration seatingDuration;
   private List<TableConfiguration> tables;
 
