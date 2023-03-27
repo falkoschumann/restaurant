@@ -63,11 +63,10 @@ jacocoTestReport {
 }
 
 pitest {
+  pitestVersion = '1.11.7'
   junit5PluginVersion = '1.0.0'
   timestampedReports = false
 }
-
-check.dependsOn 'pitest'
 
 checkstyle {
   toolVersion = '10.8.0'
